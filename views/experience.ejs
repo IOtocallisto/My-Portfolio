@@ -1,0 +1,90 @@
+<%- include('partials/header') %>
+
+<section class="py-5 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h1 class="display-4 fw-bold">Work Experience</h1>
+                <p class="lead text-muted">My professional journey and career highlights</p>
+            </div>
+        </div>
+
+        <% if (experience && experience.length > 0) { %>
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="timeline">
+                        <% experience.forEach((exp, index) => { %>
+                            <div class="timeline-item <%= index % 2 === 0 ? 'timeline-left' : 'timeline-right' %>">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <div class="card border-0 shadow-sm">
+                                        <div class="card-body">
+                                            <div class="row align-items-center">
+                                                <div class="col-md-3 text-center mb-3 mb-md-0">
+                                                    <% if (exp.company_logo_url) { %>
+                                                        <img src="<%= exp.company_logo_url %>" alt="<%= exp.company %>" class="company-logo-large mb-2">
+                                                    <% } else { %>
+                                                        <div class="company-placeholder-large bg-light rounded d-flex align-items-center justify-content-center mb-2">
+                                                            <i class="fas fa-building fa-2x text-muted"></i>
+                                                        </div>
+                                                    <% } %>
+                                                    <div class="text-muted small">
+                                                        <%= new Date(exp.start_date).toLocaleDateString() %> - 
+                                                        <%= exp.is_current ? 'Present' : new Date(exp.end_date).toLocaleDateString() %>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <h4 class="mb-1"><%= exp.position %></h4>
+                                                    <h5 class="text-primary mb-2">
+                                                        <% if (exp.company_url) { %>
+                                                            <a href="<%= exp.company_url %>" target="_blank" class="text-decoration-none">
+                                                                <%= exp.company %>
+                                                                <i class="fas fa-external-link-alt fa-sm ms-1"></i>
+                                                            </a>
+                                                        <% } else { %>
+                                                            <%= exp.company %>
+                                                        <% } %>
+                                                    </h5>
+                                                    <% if (exp.location) { %>
+                                                        <p class="text-muted mb-2">
+                                                            <i class="fas fa-map-marker-alt me-1"></i><%= exp.location %>
+                                                        </p>
+                                                    <% } %>
+                                                    <% if (exp.is_current) { %>
+                                                        <span class="badge bg-success mb-3">Current Position</span>
+                                                    <% } %>
+                                                    <p class="mb-3"><%= exp.description %></p>
+                                                    
+                                                    <% if (exp.technologies && exp.technologies.length > 0) { %>
+                                                        <div>
+                                                            <small class="text-muted d-block mb-2">Technologies & Skills:</small>
+                                                            <% exp.technologies.forEach(tech => { %>
+                                                                <span class="badge bg-secondary me-1 mb-1"><%= tech.name %></span>
+                                                            <% }); %>
+                                                        </div>
+                                                    <% } %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }); %>
+                    </div>
+                </div>
+            </div>
+        <% } else { %>
+            <div class="row">
+                <div class="col-lg-6 mx-auto text-center">
+                    <div class="py-5">
+                        <i class="fas fa-briefcase fa-5x text-muted mb-4"></i>
+                        <h3 class="text-muted">No Experience Found</h3>
+                        <p class="text-muted">Work experience will appear here once added to the CMS.</p>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</section>
+
+<%- include('partials/footer') %>

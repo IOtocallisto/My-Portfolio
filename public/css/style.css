@@ -1,0 +1,300 @@
+/* Custom Portfolio Styles */
+
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --success-color: #198754;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --info-color: #0dcaf0;
+    --dark-color: #212529;
+    --light-color: #f8f9fa;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    padding-top: 76px; /* Account for fixed navbar */
+}
+
+/* Navigation */
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--primary-color) !important;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #0056b3 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.profile-image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border: 5px solid rgba(255, 255, 255, 0.2);
+}
+
+.profile-placeholder {
+    width: 300px;
+    height: 300px;
+}
+
+/* Cards */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Project Cards */
+.project-card .card-img-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card .card-img-top {
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.project-card .card-img-overlay {
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 0.3s ease;
+}
+
+.project-card:hover .card-img-overlay {
+    opacity: 1 !important;
+}
+
+/* Skills */
+.skill-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.skill-icon-large {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+}
+
+.skill-icon-placeholder {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.skill-card {
+    transition: all 0.3s ease;
+}
+
+.skill-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1) !important;
+}
+
+.skill-level .fa-star {
+    font-size: 0.9rem;
+}
+
+/* Experience Timeline */
+.timeline {
+    position: relative;
+    padding: 2rem 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--primary-color);
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    width: 50%;
+}
+
+.timeline-left {
+    left: 0;
+    padding-right: 2rem;
+}
+
+.timeline-right {
+    left: 50%;
+    padding-left: 2rem;
+}
+
+.timeline-marker {
+    position: absolute;
+    top: 1rem;
+    width: 16px;
+    height: 16px;
+    background: var(--primary-color);
+    border: 3px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px var(--primary-color);
+}
+
+.timeline-left .timeline-marker {
+    right: -8px;
+}
+
+.timeline-right .timeline-marker {
+    left: -8px;
+}
+
+.timeline-content {
+    position: relative;
+}
+
+/* Company Logos */
+.company-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.company-logo-large {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.company-placeholder {
+    width: 60px;
+    height: 60px;
+}
+
+.company-placeholder-large {
+    width: 80px;
+    height: 80px;
+}
+
+/* Contact Form */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section {
+        text-align: center;
+        padding: 2rem 0;
+    }
+    
+    .profile-image,
+    .profile-placeholder {
+        width: 200px;
+        height: 200px;
+        margin: 2rem auto;
+    }
+    
+    .timeline::before {
+        left: 2rem;
+    }
+    
+    .timeline-item {
+        width: 100%;
+        left: 0 !important;
+        padding-left: 4rem !important;
+        padding-right: 0 !important;
+    }
+    
+    .timeline-marker {
+        left: 1.5rem !important;
+        right: auto !important;
+    }
+    
+    .display-4 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        padding-top: 70px;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .hero-section {
+        min-height: auto;
+        padding: 3rem 0;
+    }
+    
+    .profile-image,
+    .profile-placeholder {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Utilities */
+.text-gradient {
+    background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.shadow-lg {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+/* Loading States */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+}

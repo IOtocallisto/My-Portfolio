@@ -1,0 +1,180 @@
+<%- include('partials/header') %>
+
+<!-- Hero Section -->
+<section class="hero-section bg-primary text-white py-5">
+    <div class="container">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-lg-6">
+                <% if (data.personal_info) { %>
+                    <h1 class="display-4 fw-bold mb-3">
+                        Hello, I'm <%= data.personal_info.name %>
+                    </h1>
+                    <h2 class="h3 mb-4 text-light">
+                        <%= data.personal_info.title %>
+                    </h2>
+                    <p class="lead mb-4">
+                        <%= data.personal_info.bio %>
+                    </p>
+                    <div class="d-flex gap-3 mb-4">
+                        <% if (data.personal_info.github_url) { %>
+                            <a href="<%= data.personal_info.github_url %>" class="btn btn-outline-light" target="_blank">
+                                <i class="fab fa-github me-2"></i>GitHub
+                            </a>
+                        <% } %>
+                        <% if (data.personal_info.linkedin_url) { %>
+                            <a href="<%= data.personal_info.linkedin_url %>" class="btn btn-outline-light" target="_blank">
+                                <i class="fab fa-linkedin me-2"></i>LinkedIn
+                            </a>
+                        <% } %>
+                        <% if (data.personal_info.resume_url) { %>
+                            <a href="<%= data.personal_info.resume_url %>" class="btn btn-light" target="_blank">
+                                <i class="fas fa-download me-2"></i>Resume
+                            </a>
+                        <% } %>
+                    </div>
+                <% } else { %>
+                    <h1 class="display-4 fw-bold mb-3">Welcome to My Portfolio</h1>
+                    <p class="lead mb-4">Showcasing my work and experience</p>
+                <% } %>
+                <a href="/contact" class="btn btn-light btn-lg">Get In Touch</a>
+            </div>
+            <div class="col-lg-6 text-center">
+                <% if (data.personal_info && data.personal_info.profile_image_url) { %>
+                    <img src="<%= data.personal_info.profile_image_url %>" 
+                         alt="<%= data.personal_info.name %>" 
+                         class="img-fluid rounded-circle shadow-lg profile-image">
+                <% } else { %>
+                    <div class="profile-placeholder bg-light rounded-circle mx-auto d-flex align-items-center justify-content-center">
+                        <i class="fas fa-user fa-5x text-muted"></i>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Skills Section -->
+<% if (data.featured_skills && data.featured_skills.length > 0) { %>
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Core Skills</h2>
+        <div class="row g-4">
+            <% data.featured_skills.forEach(skill => { %>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center">
+                            <% if (skill.icon_url) { %>
+                                <img src="<%= skill.icon_url %>" alt="<%= skill.name %>" class="skill-icon mb-3">
+                            <% } else { %>
+                                <i class="fas fa-code fa-3x text-primary mb-3"></i>
+                            <% } %>
+                            <h5 class="card-title"><%= skill.name %></h5>
+                            <p class="card-text text-muted"><%= skill.description %></p>
+                            <div class="skill-level">
+                                <% for (let i = 1; i <= 5; i++) { %>
+                                    <i class="fas fa-star <%= i <= skill.proficiency_level ? 'text-warning' : 'text-muted' %>"></i>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+        <div class="text-center mt-4">
+            <a href="/skills" class="btn btn-primary">View All Skills</a>
+        </div>
+    </div>
+</section>
+<% } %>
+
+<!-- Featured Projects Section -->
+<% if (data.featured_projects && data.featured_projects.length > 0) { %>
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Featured Projects</h2>
+        <div class="row g-4">
+            <% data.featured_projects.forEach(project => { %>
+                <div class="col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <% if (project.featured_image_url) { %>
+                            <img src="<%= project.featured_image_url %>" class="card-img-top" alt="<%= project.title %>">
+                        <% } %>
+                        <div class="card-body">
+                            <h5 class="card-title"><%= project.title %></h5>
+                            <p class="card-text"><%= project.description %></p>
+                            <div class="mb-3">
+                                <% project.technologies.forEach(tech => { %>
+                                    <span class="badge bg-secondary me-1"><%= tech.name %></span>
+                                <% }); %>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <div class="d-flex gap-2">
+                                <a href="/projects/<%= project.id %>" class="btn btn-primary btn-sm">View Details</a>
+                                <% if (project.project_url) { %>
+                                    <a href="<%= project.project_url %>" class="btn btn-outline-primary btn-sm" target="_blank">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                <% } %>
+                                <% if (project.github_url) { %>
+                                    <a href="<%= project.github_url %>" class="btn btn-outline-dark btn-sm" target="_blank">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+        <div class="text-center mt-4">
+            <a href="/projects" class="btn btn-primary">View All Projects</a>
+        </div>
+    </div>
+</section>
+<% } %>
+
+<!-- Recent Experience Section -->
+<% if (data.recent_experience && data.recent_experience.length > 0) { %>
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Recent Experience</h2>
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <% data.recent_experience.forEach((exp, index) => { %>
+                    <div class="card mb-4 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-2 text-center">
+                                    <% if (exp.company_logo_url) { %>
+                                        <img src="<%= exp.company_logo_url %>" alt="<%= exp.company %>" class="company-logo">
+                                    <% } else { %>
+                                        <div class="company-placeholder bg-light rounded d-flex align-items-center justify-content-center">
+                                            <i class="fas fa-building text-muted"></i>
+                                        </div>
+                                    <% } %>
+                                </div>
+                                <div class="col-md-10">
+                                    <h5 class="mb-1"><%= exp.position %></h5>
+                                    <h6 class="text-primary mb-2"><%= exp.company %></h6>
+                                    <p class="text-muted mb-2">
+                                        <%= new Date(exp.start_date).toLocaleDateString() %> - 
+                                        <%= exp.is_current ? 'Present' : new Date(exp.end_date).toLocaleDateString() %>
+                                        <% if (exp.location) { %> | <%= exp.location %><% } %>
+                                    </p>
+                                    <p class="mb-0"><%= exp.description %></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+                <div class="text-center">
+                    <a href="/experience" class="btn btn-primary">View Full Experience</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<% } %>
+
+<%- include('partials/footer') %>

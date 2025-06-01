@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+
+<section class="py-5 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto text-center">
+                <div class="py-5">
+                    <i class="fas fa-check-circle fa-5x text-success mb-4"></i>
+                    <h1 class="display-4 fw-bold mb-3"><%= title %></h1>
+                    <p class="lead text-muted mb-4"><%= message %></p>
+                    
+                    <div class="mt-4">
+                        <a href="/" class="btn btn-primary me-2">
+                            <i class="fas fa-home me-2"></i>Go Home
+                        </a>
+                        <a href="/contact" class="btn btn-outline-secondary">
+                            <i class="fas fa-envelope me-2"></i>Send Another Message
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('partials/footer') %>
