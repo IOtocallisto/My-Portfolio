@@ -1,0 +1,17 @@
+Django>=5.2,<5.3
+django-cms>=5.0.1
+djangocms-versioning
+djangocms-alias
+djangocms-frontend>=2.0.0a1
+djangocms-text
+djangocms-link
+django-filer
+django-fsm<3
+djangorestframework
+django-cors-headers
+Pillow
+easy-thumbnails
+django-sekizai
+django-treebeard
+django-parler
+djangocms-admin-style
