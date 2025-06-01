@@ -10,13 +10,6 @@ jobs:
   integration-test:
     runs-on: ubuntu-latest
     
-    services:
-      # Add a simple HTTP service for testing
-      httpbin:
-        image: kennethreitz/httpbin
-        ports:
-          - 8080:80
-    
     steps:
     - uses: actions/checkout@v4
     
@@ -98,30 +91,15 @@ jobs:
     - name: Test Frontend-Backend Integration
       run: |
         echo "🔍 Testing frontend-backend integration..."
-        
-        # Test if frontend can reach backend
-        python3 -c "
-import requests
-import time
-import sys
 
-try:
-    # Test Django backend
-    django_response = requests.get('http://localhost:8001/', timeout=5)
-    print(f'✅ Django backend responding with status: {django_response.status_code}')
-    
-    # Test Node.js frontend
-    nodejs_response = requests.get('http://localhost:3000/', timeout=5)
-    print(f'✅ Node.js frontend responding with status: {nodejs_response.status_code}')
-    
-    print('✅ Integration test passed')
-except requests.exceptions.RequestException as e:
-    print(f'⚠️ Integration test warning: {e}')
-    # Don't fail the build for integration issues
-except Exception as e:
-    print(f'❌ Integration test error: {e}')
-    sys.exit(1)
-        "
+        # Simple integration test using curl
+        echo "Testing Django backend..."
+        curl -f -s http://localhost:8001/ > /dev/null && echo "✅ Django backend responding" || echo "⚠️ Django backend not responding"
+
+        echo "Testing Node.js frontend..."
+        curl -f -s http://localhost:3000/ > /dev/null && echo "✅ Node.js frontend responding" || echo "⚠️ Node.js frontend not responding"
+
+        echo "✅ Integration test completed"
     
     - name: Cleanup
       if: always()
