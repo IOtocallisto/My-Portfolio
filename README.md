@@ -2,6 +2,31 @@
 
 A modern, responsive portfolio website built with Node.js (Express.js) frontend and Django CMS backend. The frontend dynamically fetches content from Django CMS through REST API endpoints, allowing for easy content management through the Django admin interface.
 
+## 🚀 Quick Start
+
+### Frontend (Node.js/Express)
+```bash
+cd frontend
+npm install
+npm start
+# Server runs on http://localhost:3000
+```
+
+### Backend (Django CMS)
+```bash
+cd backend/screencastcms
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver 8001
+# Server runs on http://localhost:8001
+```
+
+### Documentation
+```bash
+# View comprehensive documentation
+open docs/README.md
+```
+
 ## 🚀 Features
 
 ### Frontend (Node.js)
@@ -33,32 +58,31 @@ A modern, responsive portfolio website built with Node.js (Express.js) frontend 
 ## 📁 Project Structure
 
 ```
-cms/
-├── screencastcms/              # Django CMS Backend
-│   ├── portfolio/              # Portfolio Django app
-│   │   ├── models.py          # Data models
-│   │   ├── serializers.py     # API serializers
-│   │   ├── views.py           # API views
-│   │   ├── admin.py           # Admin configuration
-│   │   └── urls.py            # API URLs
-│   ├── screencastcms/         # Django project settings
-│   └── manage.py              # Django management script
-├── views/                     # EJS templates
-│   ├── partials/              # Reusable template parts
-│   ├── index.ejs             # Home page
-│   ├── projects.ejs          # Projects listing
-│   ├── project-detail.ejs    # Project details
-│   ├── experience.ejs        # Work experience
-│   ├── skills.ejs            # Skills display
-│   ├── contact.ejs           # Contact form
-│   └── error.ejs             # Error pages
-├── public/                    # Static assets
-│   ├── css/style.css         # Custom styles
-│   ├── js/main.js            # Frontend JavaScript
-│   └── images/               # Image assets
-├── index.js                  # Node.js server
-├── package.json              # Node.js dependencies
-└── .env                      # Environment configuration
+Portfolio/
+├── frontend/                   # Node.js/Express frontend
+│   ├── src/
+│   │   ├── index.js           # Express server
+│   │   ├── public/            # Static assets (CSS, JS, images)
+│   │   ├── views/             # EJS templates
+│   │   └── node_modules/      # Dependencies
+│   ├── package.json           # Node.js dependencies
+│   └── README.md              # Frontend documentation
+├── backend/                   # Django CMS backend
+│   ├── screencastcms/         # Django project
+│   │   ├── portfolio/         # Portfolio Django app
+│   │   ├── screencastcms/     # Django settings
+│   │   ├── manage.py          # Django management
+│   │   └── requirements.txt   # Python dependencies
+│   └── README.md              # Backend documentation
+├── docs/                      # Comprehensive documentation
+│   ├── api/                   # API documentation
+│   ├── deployment/            # Deployment guides
+│   ├── development/           # Developer guides
+│   ├── workflows/             # CI/CD documentation
+│   └── README.md              # Documentation index
+├── .github/                   # GitHub Actions workflows
+│   └── workflows/             # CI/CD pipelines
+└── README.md                  # This file
 ```
 
 ## 🛠️ Installation & Setup
@@ -71,15 +95,15 @@ cms/
 ### 1. Clone the Repository
 ```bash
 git clone <repository-url>
-cd cms
+cd Portfolio
 ```
 
 ### 2. Backend Setup (Django CMS)
 
 #### Install Python Dependencies
 ```bash
-cd screencastcms
-pip install -r requirements.in
+cd backend/screencastcms
+pip install -r requirements.txt
 ```
 
 #### Database Setup
@@ -102,7 +126,7 @@ python manage.py collectstatic
 
 #### Install Node.js Dependencies
 ```bash
-cd ..  # Back to root directory
+cd ../../frontend  # Navigate to frontend directory
 npm install
 ```
 
@@ -119,14 +143,15 @@ SESSION_SECRET=your-secret-key-here
 
 ### 1. Start Django CMS Backend
 ```bash
-cd screencastcms
-python manage.py runserver
+cd backend/screencastcms
+python manage.py runserver 8001
 ```
-The Django admin will be available at: `http://localhost:8000/admin/`
+The Django admin will be available at: `http://localhost:8001/admin/`
 
 ### 2. Start Node.js Frontend
 In a new terminal:
 ```bash
+cd frontend
 npm start
 # or for development with auto-reload:
 npm run dev

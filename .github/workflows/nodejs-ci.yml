@@ -24,23 +24,29 @@ jobs:
         cache: 'npm'
     
     - name: Install dependencies
-      run: npm ci
-    
+      run: |
+        cd frontend
+        npm ci
+
     - name: Check for security vulnerabilities
-      run: npm audit --audit-level=high
-    
+      run: |
+        cd frontend
+        npm audit --audit-level=high
+
     - name: Lint code
       run: |
+        cd frontend
         # Install ESLint if not in package.json
         if ! npm list eslint > /dev/null 2>&1; then
           npm install --no-save eslint
         fi
         # Run basic syntax check
-        node -c index.js
+        node -c src/index.js
         echo "✅ JavaScript syntax check passed"
-    
+
     - name: Test application startup
       run: |
+        cd frontend
         timeout 10s npm start &
         sleep 5
         if curl -f http://localhost:3000 > /dev/null 2>&1; then
@@ -48,17 +54,19 @@ jobs:
         else
           echo "⚠️ Server may not be fully ready (this is normal for quick tests)"
         fi
-        pkill -f "node index.js" || true
-    
+        pkill -f "node src/index.js" || true
+
     - name: Check package.json validity
       run: |
+        cd frontend
         node -e "console.log('Package.json is valid:', JSON.parse(require('fs').readFileSync('package.json', 'utf8')).name)"
-    
+
     - name: Verify required files
       run: |
+        cd frontend
         echo "Checking required files..."
-        test -f index.js && echo "✅ index.js exists"
+        test -f src/index.js && echo "✅ src/index.js exists"
         test -f package.json && echo "✅ package.json exists"
-        test -d views && echo "✅ views directory exists"
-        test -d public && echo "✅ public directory exists"
+        test -d src/views && echo "✅ src/views directory exists"
+        test -d src/public && echo "✅ src/public directory exists"
         echo "✅ All required files present"

@@ -26,20 +26,20 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        cd screencastcms
+        cd backend/screencastcms
         pip install -r requirements.txt
 
     - name: Run Django System Checks
       run: |
-        cd screencastcms
+        cd backend/screencastcms
         python manage.py check
 
     - name: Run Migrations
       run: |
-        cd screencastcms
+        cd backend/screencastcms
         python manage.py migrate
 
     - name: Run Tests
       run: |
-        cd screencastcms
+        cd backend/screencastcms
         python manage.py test

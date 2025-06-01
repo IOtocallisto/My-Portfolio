@@ -27,33 +27,36 @@ jobs:
     - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
-        cd screencastcms
+        cd backend/screencastcms
         pip install -r requirements.txt
         pip install flake8 black isort
-    
+
     - name: Install Node.js dependencies
-      run: npm ci
+      run: |
+        cd frontend
+        npm ci
     
     - name: Python Code Quality Checks
       run: |
-        cd screencastcms
+        cd backend/screencastcms
         echo "🔍 Running Python linting with flake8..."
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics || echo "⚠️ Some linting issues found"
-        
+
         echo "🔍 Checking Python import sorting..."
         isort . --check-only --diff || echo "⚠️ Import sorting issues found"
-        
+
         echo "🔍 Checking Python code formatting..."
         black . --check --diff || echo "⚠️ Code formatting issues found"
-    
+
     - name: JavaScript Code Quality Checks
       run: |
+        cd frontend
         echo "🔍 Checking JavaScript syntax..."
-        node -c index.js
+        node -c src/index.js
         
         echo "🔍 Checking for common issues..."
         # Check for console.log statements (should be minimal in production)
-        if grep -r "console\.log" index.js; then
+        if grep -r "console\.log" src/index.js; then
           echo "⚠️ Found console.log statements - consider using proper logging"
         else
           echo "✅ No console.log statements found"
